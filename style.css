@@ -1,0 +1,120 @@
+/* Reset básico para controlar espacios iniciales del navegador */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilo general del cuerpo: fondo oscuro y estética de terminal */
+body {
+    min-height: 100vh;
+    background-color: #000;
+    color: #00ff66;
+    font-family: "Courier New", Courier, monospace;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    padding-left: 24px;
+}
+
+/* Contenedor principal con forma de rectángulo vertical */
+.woolet-container {
+    width: 320px;
+    min-height: 560px;
+    padding: 24px;
+
+    border: 2px solid #00ff66;
+    background-color: rgba(0, 20, 0, 0.35);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Caja superior para el logo */
+.logo-box {
+    width: 100%;
+    height: 300px;
+
+    border: 1px solid #00ff66;
+    background-color: rgba(0, 255, 102, 0.04);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 16px;
+}
+
+/* Placeholder visual para indicar dónde irá la imagen */
+.logo-placeholder {
+    width: 100%;
+    height: 100%;
+
+    border: 1px dashed #00ff66;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    text-align: center;
+}
+
+/* Caja inferior de autenticación */
+.auth-box {
+    width: 100%;
+    margin-top: 28px;
+
+    border: 1px solid #00ff66;
+    background-color: rgba(0, 255, 102, 0.03);
+
+    padding: 18px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Inputs con estética de terminal */
+.terminal-input {
+    width: 100%;
+    padding: 10px;
+
+    background-color: #000;
+    color: #00ff66;
+
+    border: 1px solid #00ff66;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+/* Efecto visual al seleccionar un input */
+.terminal-input:focus {
+    outline: none;
+    box-shadow: 0 0 8px #00ff66;
+}
+
+/* Botón de acceso */
+.access-button {
+    padding: 10px;
+
+    background-color: #000;
+    color: #00ff66;
+
+    border: 1px solid #00ff66;
+    font-family: inherit;
+    font-size: 1rem;
+    letter-spacing: 2px;
+
+    cursor: pointer;
+}
+
+/* Efecto simple al pasar el cursor sobre el botón */
+.access-button:hover {
+    background-color: #00ff66;
+    color: #000;
+}
