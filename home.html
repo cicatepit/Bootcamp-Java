@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Configuración básica del documento HTML -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Título visible en la pestaña del navegador -->
+    <title>WOOLET | Home</title>
+
+    <!-- Conexión con la hoja de estilos externa -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-layout"><!--TEST-->
+    <!-- Contenedor general de la interfaz izquierda -->
+    <main class="woolet-container">
+
+        <!-- Caja superior destinada al logo de la wallet -->
+        <section class="logo-box">            
+            <!--Uso de archivo .png para despejar el código-->
+            <img
+                src="assets/woolet-logo.png"
+                alt="WOOLET Logo"
+                class="logo-image"
+            >
+        </section>
+
+        <!-- Caja inferior convertida en menú de navegación -->
+        <section class="auth-box" id="authBox">
+
+            <nav class="nav-menu">
+                <!--class="nav-button active". active marca la ubicación-->
+                
+                <a class="nav-button active" href="home.html">
+                    &gt; HOME
+                </a>
+
+                <a class="nav-button" href="transferir.html">
+                    &gt; TRANSFERIR
+                </a>
+
+                <a class="nav-button" href="destinatarios.html">
+                    &gt; DESTINATARIOS
+                </a>
+
+                <a class="nav-button" href="perfil.html">
+                    &gt; PERFIL
+                </a>
+
+                <button class="nav-button logout-button" id="logoutButton">
+                    &gt; SALIR
+                </button>
+
+            </nav>
+
+        </section>
+
+    </main>
+
+    <!-- Panel derecho de información -->
+    <section class="content-panel active" id="contentPanel">
+
+        <h2>HOME</h2>
+
+        <p>
+            Bienvenido a WOOLET. Este es el panel principal de la billetera digital.
+            Desde aquí podrás consultar el estado general de tu cuenta y navegar hacia
+            las operaciones disponibles.
+        </p>
+
+    </section>
+
+     <!-- Panel derecho. TEST -->
+    <section class="detail-panel">
+        <h2>DETALLE</h2>
+        <p>Formularios, información secundaria o acciones.</p>
+    </section>
+
+    </div><!--TEST-->
+
+    <!-- Footer permanente -->
+    <footer class="woolet-footer">
+        WOOLET // digital wallet prototype // bootcamp java
+    </footer>
+
+    <!-- Script general -->
+    <script src="script.js"></script>
+
+</body>
+</html>

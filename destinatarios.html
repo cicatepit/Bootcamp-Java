@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Configuración básica del documento HTML -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Título visible en la pestaña del navegador -->
+    <title>WOOLET | Destinatarios</title>
+
+    <!-- Conexión con la hoja de estilos externa -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app-layout"><!--TEST-->
+    <!-- Contenedor general de la interfaz izquierda -->
+    <main class="woolet-container">
+
+        <!-- Caja superior destinada al logo de la wallet -->
+        <section class="logo-box">
+            <img
+                src="assets/woolet-logo.png"
+                alt="WOOLET Logo"
+                class="logo-image"
+            >
+        </section>
+
+        <!-- Caja inferior convertida en menú de navegación -->
+        <section class="auth-box" id="authBox">
+
+            <nav class="nav-menu">
+                <!--class="nav-button active". active marca la ubicación-->
+                
+                <a class="nav-button" href="home.html">
+                    &gt; HOME
+                </a>
+
+                <a class="nav-button" href="transferir.html">
+                    &gt; TRANSFERIR
+                </a>
+
+                <a class="nav-button active" href="destinatarios.html">
+                    &gt; DESTINATARIOS
+                </a>
+
+                <a class="nav-button" href="perfil.html">
+                    &gt; PERFIL
+                </a>
+
+                <button class="nav-button logout-button" id="logoutButton">
+                    &gt; SALIR
+                </button>
+
+            </nav>
+
+        </section>
+
+    </main>
+
+    <!-- Panel derecho de información -->
+    <section class="content-panel active" id="contentPanel">
+
+        <h2>DESTINATARIOS</h2>
+
+        <div class="recipient-list">
+
+            <div class="recipient-card">
+                <h3>Juan Pérez</h3>
+                <p>Cuenta: 123456789</p>
+            </div>
+
+            <div class="recipient-card">
+                <h3>María González</h3>
+                <p>Cuenta: 987654321</p>
+            </div>
+
+            <div class="recipient-card">
+                <h3>Empresa XYZ</h3>
+                <p>Cuenta: 456789123</p>
+            </div>
+
+        </div>
+
+        <button
+            type="button"
+            class="access-button"
+        >
+            AGREGAR DESTINATARIO
+        </button>
+
+    </section>
+</div>
+    <!-- Footer permanente -->
+    <footer class="woolet-footer">
+        WOOLET // digital wallet prototype // bootcamp java
+    </footer>
+
+    <!-- Script general -->
+    <script src="script.js"></script>
+
+</body>
+</html>

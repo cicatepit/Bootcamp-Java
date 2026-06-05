@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Configuración básica del documento HTML -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Título visible en la pestaña del navegador -->
+    <title>WOOLET | Transferir</title>
+
+    <!-- Conexión con la hoja de estilos externa -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app-layout"><!--TEST-->
+    <!-- Contenedor general de la interfaz izquierda -->
+    <main class="woolet-container">
+
+        <!-- Caja superior destinada al logo de la wallet -->
+        <section class="logo-box">
+            <img
+                src="assets/woolet-logo.png"
+                alt="WOOLET Logo"
+                class="logo-image"
+            >
+        </section>
+
+        <!-- Caja inferior convertida en menú de navegación -->
+        <section class="auth-box" id="authBox">
+
+            <nav class="nav-menu">
+                <!--class="nav-button active". active marca la ubicación-->
+                
+                <a class="nav-button" href="home.html">
+                    &gt; HOME
+                </a>
+
+                <a class="nav-button active" href="transferir.html">
+                    &gt; TRANSFERIR
+                </a>
+
+                <a class="nav-button" href="destinatarios.html">
+                    &gt; DESTINATARIOS
+                </a>
+
+                <a class="nav-button" href="perfil.html">
+                    &gt; PERFIL
+                </a>
+
+                <button class="nav-button logout-button" id="logoutButton">
+                    &gt; SALIR
+                </button>
+
+            </nav>
+
+        </section>
+
+    </main>
+
+    <!-- Panel derecho de información -->
+    <section class="content-panel active" id="contentPanel">
+
+        <h2>TRANSFERIR</h2>
+
+        <form class="transfer-form">
+
+            <label for="destinatario">
+                Destinatario
+            </label>
+
+            <input
+                type="text"
+                id="destinatario"
+                class="terminal-input"
+                placeholder="Alias o cuenta"
+            >
+
+            <label for="monto">
+                Monto
+            </label>
+
+            <input
+                type="number"
+                id="monto"
+                class="terminal-input"
+                placeholder="$"
+            >
+
+            <label for="mensaje">
+                Mensaje
+            </label>
+
+            <textarea
+                id="mensaje"
+                class="terminal-textarea"
+                placeholder="Comentario opcional"
+            ></textarea>
+
+            <button
+                type="button"
+                class="access-button"
+            >
+                TRANSFERIR
+            </button>
+
+        </form>
+
+    </section>
+</div>
+    <!-- Footer permanente -->
+    <footer class="woolet-footer">
+        WOOLET // digital wallet prototype // bootcamp java
+    </footer>
+
+    <!-- Script general -->
+    <script src="script.js"></script>
+
+</body>
+</html>

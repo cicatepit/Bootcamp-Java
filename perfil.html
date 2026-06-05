@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>WOOLET | Perfil</title>
+
+    <link rel="stylesheet" href="estilotest.css">
+</head>
+
+<body>
+<div class="app-layout"><!--TEST-->
+    <!-- Contenedor izquierdo -->
+    <main class="woolet-container">
+
+        <!-- Logo -->
+        <section class="logo-box">
+            <img
+                src="assets/woolet-logo.png"
+                alt="WOOLET Logo"
+                class="logo-image"
+            >
+        </section>
+
+        <!-- Navegación -->
+        <section class="auth-box" id="authBox">
+
+            <nav class="nav-menu">
+
+                <a class="nav-button" href="home.html">
+                    &gt; HOME
+                </a>
+
+                <a class="nav-button" href="transferir.html">
+                    &gt; TRANSFERIR
+                </a>
+
+                <a class="nav-button" href="destinatarios.html">
+                    &gt; DESTINATARIOS
+                </a>
+
+                <a class="nav-button active" href="perfil.html">
+                    &gt; PERFIL
+                </a>
+
+                <button class="nav-button logout-button" id="logoutButton">
+                    &gt; SALIR
+                </button>
+
+            </nav>
+
+        </section>
+
+    </main>
+
+    <!-- Panel de información -->
+    <section class="content-panel active" id="contentPanel">
+
+        <h2>PERFIL DE USUARIO</h2>
+
+        <div class="profile-card">
+
+            <div class="profile-row">
+                <span class="profile-label">Nombre</span>
+                <span class="profile-value">Juan Pérez Soto</span>
+            </div>
+
+            <div class="profile-row">
+                <span class="profile-label">N° Cuenta</span>
+                <span class="profile-value">1029384756</span>
+            </div>
+
+            <div class="profile-row">
+                <span class="profile-label">Correo</span>
+                <span class="profile-value">juan@email.com</span>
+            </div>
+
+            <div class="profile-row">
+                <span class="profile-label">Teléfono</span>
+                <span class="profile-value">+56 9 1234 5678</span>
+            </div>
+
+            <div class="profile-row">
+                <span class="profile-label">RUT</span>
+                <span class="profile-value">12.345.678-9</span>
+            </div>
+
+            <div class="profile-row">
+                <span class="profile-label">Estado</span>
+                <span class="profile-value">ACTIVO</span>
+            </div>
+
+            <div class="profile-row">
+                <span class="profile-label">Último Acceso</span>
+                <span class="profile-value">03/06/2026 21:45</span>
+            </div>
+
+        </div>
+
+        <button
+            type="button"
+            class="access-button"
+        >
+            EDITAR PERFIL
+        </button>
+
+    </section>
+</div>
+    <!-- Footer -->
+    <footer class="woolet-footer">
+        WOOLET // digital wallet prototype // bootcamp java
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
