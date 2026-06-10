@@ -8,22 +8,15 @@
     <!-- Font Awesome: iconografía liviana para mejorar UX. -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <title>WOOLET | Perfil</title>
+    <title>WOOLET | Salir</title>
 </head>
-<body data-page="perfil">
-    <!-- Shell de componentes: sidebar + contenido + detalle. -->
-    <div class="app-layout">
-        <div id="sidebarComponent" data-active="perfil"></div>
-        <main class="content-panel main-content active" id="contentPanel">
-            <div class="panel-title-row">
-                <h2>PERFIL DE USUARIO</h2>
-                <button type="button" class="access-button compact-button" id="showEditProfileButton"><i class="fa-solid fa-user-pen"></i> EDITAR PERFIL</button>
-            </div>
-            <div class="profile-card" id="profileSummary"></div>
+<body data-page="salir">
+    <div class="app-layout login-layout">
+        <main class="woolet-container sidebar login-sidebar">
+            <section class="logo-box"><img src="assets/woolet-logo.png" alt="WOOLET Logo" class="logo-image"></section>
+            <section class="auth-box"><p class="terminal-center">SESIÓN CERRADA</p><a class="nav-button active" href="login.html">&gt; VOLVER A LOGIN</a></section>
         </main>
-        <aside class="detail-panel " id="detailPanel">
-
-        </aside>
+        <section class="content-panel login-panel active"><h1>WOOLET</h1><p>La sesión fue finalizada correctamente.</p></section>
     </div>
     <div id="footerComponent"></div>
     <!-- jQuery: requerido por evaluación; usado para eventos, DOM y fadeIn/fadeOut. -->

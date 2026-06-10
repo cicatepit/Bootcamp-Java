@@ -1,92 +1,50 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <!-- Configuración básica del documento HTML -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Título visible en la pestaña del navegador -->
-    <title>WOOLET | Home</title>
-
-    <!-- Conexión con la hoja de estilos externa -->
+    <!-- Bootstrap: requerido por evaluación; aporta responsividad y componentes base. -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome: iconografía liviana para mejorar UX. -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <title>WOOLET | Home</title>
 </head>
-<body>
-
-    <div class="app-layout"><!--TEST-->
-    <!-- Contenedor general de la interfaz izquierda -->
-    <main class="woolet-container">
-
-        <!-- Caja superior destinada al logo de la wallet -->
-        <section class="logo-box">            
-            <!--Uso de archivo .png para despejar el código-->
-            <img
-                src="assets/woolet-logo.png"
-                alt="WOOLET Logo"
-                class="logo-image"
-            >
-        </section>
-
-        <!-- Caja inferior convertida en menú de navegación -->
-        <section class="auth-box" id="authBox">
-
-            <nav class="nav-menu">
-                <!--class="nav-button active". active marca la ubicación-->
-                
-                <a class="nav-button active" href="home.html">
-                    &gt; HOME
-                </a>
-
-                <a class="nav-button" href="transferir.html">
-                    &gt; TRANSFERIR
-                </a>
-
-                <a class="nav-button" href="destinatarios.html">
-                    &gt; DESTINATARIOS
-                </a>
-
-                <a class="nav-button" href="perfil.html">
-                    &gt; PERFIL
-                </a>
-
-                <button class="nav-button logout-button" id="logoutButton">
-                    &gt; SALIR
-                </button>
-
-            </nav>
-
-        </section>
-
-    </main>
-
-    <!-- Panel derecho de información -->
-    <section class="content-panel active" id="contentPanel">
-
-        <h2>HOME</h2>
-
-        <p>
-            Bienvenido a WOOLET. Este es el panel principal de la billetera digital.
-            Desde aquí podrás consultar el estado general de tu cuenta y navegar hacia
-            las operaciones disponibles.
-        </p>
-
-    </section>
-
-     <!-- Panel derecho. TEST -->
-    <section class="detail-panel">
-        <h2>DETALLE</h2>
-        <p>Formularios, información secundaria o acciones.</p>
-    </section>
-
-    </div><!--TEST-->
-
-    <!-- Footer permanente -->
-    <footer class="woolet-footer">
-        WOOLET // digital wallet prototype // bootcamp java
-    </footer>
-
-    <!-- Script general -->
+<body data-page="home">
+    <!-- Shell de componentes: sidebar + contenido + detalle. -->
+    <div class="app-layout">
+        <div id="sidebarComponent" data-active="home"></div>
+        <main class="content-panel main-content active" id="contentPanel">
+            <section class="account-hero">
+                <p class="terminal-label">SALDO DISPONIBLE</p>
+                <h1 class="balance-glow" id="homeBalance">$0</h1>
+                <p class="account-owner" id="homeOwner">Usuario demo</p>
+                <p class="account-type" id="homeAccountType">Cuenta digital WOOLET</p>
+            </section>
+            <section class="account-copy-box">
+                <p class="terminal-label">DATOS PARA COPIAR Y COMPARTIR</p>
+                <p><strong>Nombre:</strong> <span id="shareName"></span></p>
+                <p><strong>Tipo:</strong> <span id="shareType"></span></p>
+                <p><strong>N° Cuenta:</strong> <span id="shareAccount"></span></p>
+                <p><strong>Email:</strong> <span id="shareEmail"></span></p>
+                <button class="access-button compact-button" id="copyAccountButton" type="button"><i class="fa-regular fa-copy"></i> COPIAR DATOS</button>
+                <small id="copyFeedback" class="terminal-hint"></small>
+            </section>
+        </main>
+        <aside class="detail-panel active" id="detailPanel">
+            <h2>MOVIMIENTOS CONFIRMADOS</h2>
+            <div class="table-responsive terminal-table-wrap">
+                <table class="table table-dark table-sm terminal-table">
+                    <thead><tr><th>Fecha</th><th>Hora</th><th>Proceso</th><th>Resultado</th></tr></thead>
+                    <tbody id="movementsTableBody"></tbody>
+                </table>
+            </div>
+        </aside>
+    </div>
+    <div id="footerComponent"></div>
+    <!-- jQuery: requerido por evaluación; usado para eventos, DOM y fadeIn/fadeOut. -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
-
 </body>
 </html>

@@ -1,56 +1,24 @@
-const USER = "user";
-const PASS = "pass";
-
-const accessButton = document.getElementById("accessButton");
-const logoutButton = document.getElementById("logoutButton");
-const authBox = document.getElementById("authBox");
-
-if (accessButton) {
-    accessButton.addEventListener("click", autenticarUsuario);
-}
-
-if (logoutButton) {
-    logoutButton.addEventListener("click", mostrarConfirmacionSalida);
-}
-
-function autenticarUsuario() {
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
-    const loginError = document.getElementById("loginError");
-
-    if (username === USER && password === PASS) {
-        window.location.href = "home.html";
-    } else {
-        loginError.textContent = "Credenciales inválidas.";
-    }
-}
-
-function mostrarConfirmacionSalida() {
-    authBox.innerHTML = `
-        <section class="logout-popup">
-            <p>¿Cerrar sesión?</p>
-
-            <div class="logout-options">
-                <button class="nav-button" id="confirmLogout">
-                    CONFIRMAR
-                </button>
-
-                <button class="nav-button" id="cancelLogout">
-                    CANCELAR
-                </button>
-            </div>
-        </section>
-    `;
-
-    document.getElementById("confirmLogout").addEventListener("click", cerrarSesion);
-    document.getElementById("cancelLogout").addEventListener("click", volverAlMenu);
-}
-
-function cerrarSesion() {
-    window.location.href = "index.html";
-}
-
-function volverAlMenu() {
-    window.location.reload();
-}
-
+/*
+ WOOLET - script.js
+ Enfoque por componentes:
+ - El HTML contiene zonas de montaje: #sidebarComponent y #footerComponent.
+ - JavaScript renderiza esos bloques una sola vez y evita repetir sidebar/footer en cada página.
+ - En Spring Boot, esta idea puede migrar a fragments Thymeleaf o includes JSP.
+ - localStorage simula persistencia cliente mientras aún no existe backend.
+*/
+$(function(){initState();renderFooter();renderSidebar();const p=$('body').data('page');if(p==='login')setupLogin();if(p==='home')renderHome();if(p==='transferir')setupTransfer();if(p==='destinatarios')setupRecipients();if(p==='perfil')setupProfile();});
+function initState(){if(localStorage.getItem('wooletUser'))return;localStorage.setItem('wooletUser',JSON.stringify({username:'user',password:'pass',nombre:'Juan Pérez Soto',rut:'12.345.678-9',email:'juan@email.com',telefono:'+56 9 1234 5678',tipoCuenta:'Cuenta digital WOOLET',numeroCuenta:'1029384756',estado:'ACTIVO'}));localStorage.setItem('wooletBalance','150000');localStorage.setItem('wooletRecipients',JSON.stringify([{nombre:'Juan',apellido:'Pérez',rut:'11.111.111-1',banco:'Banco Estado',tipoCuenta:'Cuenta RUT',numeroCuenta:'123456789',email:'juan@email.com'},{nombre:'María',apellido:'González',rut:'22.222.222-2',banco:'Banco de Chile',tipoCuenta:'Cuenta Corriente',numeroCuenta:'987654321',email:'maria@email.com'}]));localStorage.setItem('wooletMovements',JSON.stringify([{fecha:'03/06/2026',hora:'21:45',descripcion:'Inicio de cuenta',resultado:'Saldo inicial confirmado'},{fecha:'04/06/2026',hora:'10:30',descripcion:'Depósito interno',resultado:'+$50.000 confirmado'},{fecha:'05/06/2026',hora:'12:10',descripcion:'Transferencia demo',resultado:'-$10.000 confirmado'}]));}
+const getUser=()=>JSON.parse(localStorage.getItem('wooletUser'));const setUser=u=>localStorage.setItem('wooletUser',JSON.stringify(u));const getBalance=()=>Number(localStorage.getItem('wooletBalance')||0);const setBalance=v=>localStorage.setItem('wooletBalance',String(v));const getRecipients=()=>JSON.parse(localStorage.getItem('wooletRecipients')||'[]');const setRecipients=r=>localStorage.setItem('wooletRecipients',JSON.stringify(r));const getMovements=()=>JSON.parse(localStorage.getItem('wooletMovements')||'[]');const setMovements=m=>localStorage.setItem('wooletMovements',JSON.stringify(m));const money=v=>new Intl.NumberFormat('es-CL',{style:'currency',currency:'CLP',maximumFractionDigits:0}).format(v);function now(){const d=new Date();return{fecha:d.toLocaleDateString('es-CL'),hora:d.toLocaleTimeString('es-CL',{hour:'2-digit',minute:'2-digit'})};}
+function renderSidebar(){const m=$('#sidebarComponent');if(!m.length)return;const a=m.data('active');m.html(`<main class="woolet-container sidebar"><section class="logo-box"><img src="assets/woolet-logo.png" alt="WOOLET Logo" class="logo-image"></section><section class="auth-box"><nav class="nav-menu"><a class="nav-button ${a==='home'?'active':''}" href="home.html">&gt; HOME</a><a class="nav-button ${a==='transferir'?'active':''}" href="transferir.html">&gt; TRANSFERIR</a><a class="nav-button ${a==='destinatarios'?'active':''}" href="destinatarios.html">&gt; DESTINATARIOS</a><a class="nav-button ${a==='perfil'?'active':''}" href="perfil.html">&gt; PERFIL</a><button class="nav-button logout-button" id="logoutButton">&gt; SALIR</button></nav></section></main>`);$('#logoutButton').on('click',()=>location.href='salir.html');}
+function renderFooter(){$('#footerComponent').html('<footer class="woolet-footer">WOOLET // digital wallet prototype // bootcamp java</footer>');}
+function showDetail(html){$('#detailPanel').stop(true,true).html(html).addClass('active').hide().fadeIn(220);}function hideDetail(){$('#detailPanel').fadeOut(180,function(){$(this).removeClass('active').empty();});}
+function setupLogin(){$('#accessButton').on('click',function(){const u=getUser();if($('#username').val().trim()===u.username&&$('#password').val().trim()===u.password){localStorage.setItem('wooletSession','active');location.href='home.html';}else{$('#loginError').text('Credenciales inválidas. Usa user / pass.');}});}
+function renderHome(){const u=getUser();$('#homeBalance').text(money(getBalance()));$('#homeOwner').text(u.nombre);$('#homeAccountType').text(`${u.tipoCuenta} // ${u.numeroCuenta}`);$('#shareName').text(u.nombre);$('#shareType').text(u.tipoCuenta);$('#shareAccount').text(u.numeroCuenta);$('#shareEmail').text(u.email);$('#copyAccountButton').on('click',function(){navigator.clipboard.writeText(`${u.nombre} | ${u.tipoCuenta} | ${u.numeroCuenta} | ${u.email}`);$('#copyFeedback').text('Datos copiados.');});renderMovements();}
+function renderMovements(){let html='';getMovements().forEach((x,i)=>{html+=`<tr><td>${x.fecha}</td><td>${x.hora}</td><td>${x.descripcion}</td><td>${x.resultado}</td></tr>`;if((i+1)%10===0)html+=`<tr class="balance-row"><td colspan="4">BALANCE ACTUAL: ${money(getBalance())}</td></tr>`;});$('#movementsTableBody').html(html);}
+function setupTransfer(){$('#previewTransferButton').on('click',function(){const u=getUser(),dest=$('#destinatario').val().trim(),m=Number($('#monto').val()),s=getBalance();if(!dest||!m||m<=0){showDetail('<h2>VALIDACIÓN</h2><p class="danger-state">Ingresa cuenta destino y monto válido.</p>');return;}if(m>s){showDetail(`<h2>TRANSFERENCIA RECHAZADA</h2><div class="danger-state"><h3>${money(s)}</h3><p>FONDOS INSUFICIENTES</p></div><button class="access-button" id="newTransferButton">NUEVA TRANSFERENCIA</button>`);$('#newTransferButton').on('click',hideDetail);return;}showDetail(`<h2>CONFIRMAR TRANSFERENCIA</h2><div class="summary-card"><p><strong>Saldo:</strong> ${money(s)}</p><p><strong>Cuenta usuario:</strong> ${u.numeroCuenta}</p><p><strong>Cuenta destino:</strong> ${dest}</p><p><strong>Monto:</strong> ${money(m)}</p></div><button class="access-button" id="confirmTransferButton">CONFIRMAR TRANSFERENCIA</button>`);$('#confirmTransferButton').on('click',function(){setBalance(s-m);const t=now(),mov=getMovements();mov.unshift({fecha:t.fecha,hora:t.hora,descripcion:`Transferencia a ${dest}`,resultado:`Confirmada: -${money(m)}`});setMovements(mov);showDetail(`<h2>TRANSFERENCIA CONFIRMADA</h2><p>Nuevo saldo: ${money(s-m)}</p><button class="access-button" id="newTransferButton">NUEVA TRANSFERENCIA</button>`);$('#newTransferButton').on('click',hideDetail);});});}
+function setupRecipients(){renderRecipients();$('#recipientSearch').on('input',function(){renderRecipients($(this).val().toLowerCase());});$('#showAddRecipientButton').on('click',renderRecipientForm);}
+function renderRecipients(f=''){const arr=getRecipients().filter(r=>`${r.nombre} ${r.apellido} ${r.banco} ${r.numeroCuenta}`.toLowerCase().includes(f));$('#recipientList').html(arr.map((r,i)=>`<div class="recipient-card" data-i="${i}"><h3>${r.nombre} ${r.apellido}</h3><p>${r.banco} // ${r.tipoCuenta} // ${r.numeroCuenta}</p></div>`).join(''));$('.recipient-card').on('click',function(){const r=arr[$(this).data('i')];showDetail(`<h2>DETALLE DESTINATARIO</h2><div class="profile-card">${row('Nombre',r.nombre)}${row('Apellido',r.apellido)}${row('RUT',r.rut)}${row('Banco',r.banco)}${row('Tipo de cuenta',r.tipoCuenta)}${row('Número de cuenta',r.numeroCuenta)}${row('Email',r.email)}</div>`);});}
+function renderRecipientForm(){showDetail(`<h2>AGREGAR DESTINATARIO</h2><form class="transfer-form" novalidate>${input('recipientName','Nombre','Ej: María')}${input('recipientLastName','Apellido','Ej: González')}${input('recipientRut','RUT','Ej: 12.345.678-9')}${input('recipientBank','Banco','Ej: Banco Estado')}${input('recipientType','Tipo de cuenta','Ej: Cuenta Corriente')}${input('recipientAccount','Número de cuenta','Solo números')}${input('recipientEmail','Email','nombre@email.com')}<div class="button-row"><button type="button" class="access-button" id="addRecipientButton">AGREGAR</button><button type="button" class="access-button" id="cancelRecipientButton">CANCELAR</button></div></form>`);$('#cancelRecipientButton').on('click',hideDetail);$('#addRecipientButton').on('click',function(){if(!validateRecipient())return;const r=getRecipients();r.push({nombre:$('#recipientName').val().trim(),apellido:$('#recipientLastName').val().trim(),rut:$('#recipientRut').val().trim(),banco:$('#recipientBank').val().trim(),tipoCuenta:$('#recipientType').val().trim(),numeroCuenta:$('#recipientAccount').val().trim(),email:$('#recipientEmail').val().trim()});setRecipients(r);renderRecipients();hideDetail();});}
+function validateRecipient(){let ok=true;$('.field-error').text('');['Name','LastName','Rut','Bank','Type','Account','Email'].forEach(s=>{if(!$('#recipient'+s).val().trim()){ok=false;$('#recipient'+s+'Error').text('Campo obligatorio.');}});if($('#recipientEmail').val()&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test($('#recipientEmail').val())){ok=false;$('#recipientEmailError').text('Formato: nombre@email.com.');}if($('#recipientAccount').val()&&!/^\d+$/.test($('#recipientAccount').val())){ok=false;$('#recipientAccountError').text('Usa solo números.');}return ok;}
+function setupProfile(){renderProfile();$('#showEditProfileButton').on('click',renderProfileForm);}function renderProfile(){const u=getUser();$('#profileSummary').html(`${row('Nombre',u.nombre)}${row('N° Cuenta',u.numeroCuenta)}${row('Correo',u.email)}${row('Teléfono',u.telefono)}${row('RUT',u.rut)}${row('Estado',u.estado)}`);}function renderProfileForm(){const u=getUser();showDetail(`<h2>EDITAR PERFIL</h2><form class="transfer-form" novalidate>${input('profileName','Nombre','Nombre completo',u.nombre)}${input('profileEmail','Email','nombre@email.com',u.email)}${input('profilePhone','Teléfono','+56 9 1234 5678',u.telefono)}<div class="button-row"><button type="button" class="access-button" id="saveProfileButton">EDITAR</button><button type="button" class="access-button" id="cancelProfileButton">CANCELAR</button></div></form>`);$('#cancelProfileButton').on('click',hideDetail);$('#saveProfileButton').on('click',function(){$('.field-error').text('');let ok=true;if(!$('#profileName').val().trim()){ok=false;$('#profileNameError').text('Ingresa nombre completo.');}if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test($('#profileEmail').val())){ok=false;$('#profileEmailError').text('Formato: nombre@email.com.');}if(!$('#profilePhone').val().trim()){ok=false;$('#profilePhoneError').text('Ingresa teléfono.');}if(!ok)return;u.nombre=$('#profileName').val().trim();u.email=$('#profileEmail').val().trim();u.telefono=$('#profilePhone').val().trim();setUser(u);renderProfile();hideDetail();});}
+function input(id,label,placeholder,value=''){return `<label for="${id}">${label}</label><small class="field-error" id="${id}Error"></small><input type="text" id="${id}" class="terminal-input" placeholder="${placeholder}" value="${value}">`;}function row(label,value){return `<div class="profile-row"><span class="profile-label">${label}</span><span class="profile-value">${value}</span></div>`;}
